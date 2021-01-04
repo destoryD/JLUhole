@@ -10,6 +10,7 @@ Vue.use(vuetify)
 new Vue({
   el: '#app',
   router,
+  vuetify,
   components: { App },
   template: '<App/>'
 })
