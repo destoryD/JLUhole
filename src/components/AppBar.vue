@@ -1,6 +1,6 @@
 <template>
 <v-card>
-    <v-app-bar app flat hide-on-scroll >
+    <v-app-bar app flat hide-on-scroll elevate-on-scroll >
               <v-btn icon>
         <v-icon large >mdi-home-variant </v-icon>
       </v-btn>
