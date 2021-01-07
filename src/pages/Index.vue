@@ -1,15 +1,16 @@
 <template>
 <v-container>
-     <v-app-bar app  flat color="#B9F6CA">
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
-        <v-app-bar-title>吉林大学树洞</v-app-bar-title>
-     </v-app-bar>
+    <AppBar> </AppBar>
 </v-container>
 </template>
 
 <script>
+import AppBar from '@/components/AppBar'
 export default {
   name: 'Index',
+  components: {
+    AppBar
+  },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'
