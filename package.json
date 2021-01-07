@@ -15,8 +15,11 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "swiper": "^6.4.5",
     "vue": "^2.5.2",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-router": "^3.0.1",
+    "vue-tabs-swiper": "^1.1.6",
     "vuetify": "^2.4.0"
   },
   "devDependencies": {
