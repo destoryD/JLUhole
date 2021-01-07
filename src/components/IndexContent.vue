@@ -19,6 +19,7 @@ export default {
   name: 'Index',
   data () {
     return {
+      loading: true,
       carddata: [
         {
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
