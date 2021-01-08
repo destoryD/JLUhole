@@ -15,9 +15,11 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "katex": "^0.12.0",
     "swiper": "^6.4.5",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^4.1.1",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
     "vue-scroller": "^2.2.4",
     "vue-tabs-swiper": "^1.1.6",
