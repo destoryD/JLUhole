@@ -1,18 +1,35 @@
 <template>
     <quill-editor v-model="content" ref="myTextEditor" :options="editorOption">
-         <div id="toolbar" slot="toolbar" style="width:100%;display:flex;justify-content:space-between;z-index:999;position:fixed;bottom:0">
+         <div ref="toolbar" id="toolbar" slot="toolbar" style="width:100%;z-index:999;position:fixed;bottom:0">
             <!-- Add a bold button -->
-            <button class="ql-bold" title="加粗">Bold</button>
-            <button class="ql-underline" title="下划线">underline</button>
-            <button class="ql-strike" title="删除线">strike</button>
-            <button class="ql-blockquote" title="引用"></button>
-            <button class="ql-code-block" title="代码"></button>
+                <v-overlay :value="overlay">
+    <v-progress-circular
+      :size="100"
+      :value="uploadingprogress"
+      :width="10"
+      color="red"
+      indeterminate
+    >
+      上传中<br>{{ uploadingprogress }}%
+    </v-progress-circular>
+    </v-overlay>
+            <v-row style="display:flex;justify-content:space-between;margin:6px" v-show="customEditorOption.pretendactive">
+            <v-button icon v-for="(item, index) in customEditorOption.pretendtoobar.components" :key="index" @click="()=>{pretendclick(index),changeattr(item.value,item.active?item.onattr:item.offattr)}"><v-icon :style="item.active ? 'color:#06c':''">{{item.icon}}</v-icon></v-button>
+            <button class="ql-formula" title="引用"></button>
+            </v-row>
+            <v-row style="display:flex;justify-content:space-between;margin:6px">
+                <v-button icon  @click="pretendextend"><v-icon :style="this.customEditorOption.pretendtoobar.activecount? 'color:#06c':''">mdi-format-letter-case</v-icon></v-button>
             <v-button icon v-for="(item, index) in customEditorOption.fontsizes" :key="item.label + index" @click="()=>{changeattr('size', item.value),customEditorOption.fontactive=index}" ><v-icon :style="customEditorOption.fontactive===index ? 'color:#06c':''">{{item.icon}}</v-icon></v-button>
             <!--Add list -->
             <!-- Add font size dropdown -->
             <!-- Add subscript and superscript buttons -->
             <!-- <v-button icon title="照片"><v-icon>mdi-image-multiple</v-icon></v-button> -->
-            <v-button icon @click="uploadimage"><v-icon>mdi-image-multiple</v-icon><input ref="imageupload" type="file" style="display:none" accept="image/gif,image/jpeg,image/jpg,image/png" @change="onImgChange"></v-button>
+            <v-button icon @click="upload"><v-icon>mdi-image-multiple</v-icon><input ref="imageupload" type="file" style="display:none" accept="image/gif,image/jpeg,image/jpg,image/png" @change="onUploadChange('image')"></v-button>
+            <v-button icon @click="plusextend"><v-icon :style="customEditorOption.plusactive?'color:#06c':''">{{customEditorOption.plusactive?'mdi-minus-circle':'mdi-plus-circle'}}</v-icon></v-button>
+            </v-row>
+            <v-row style="display:flex;justify-content:space-between;margin:6px;float:right" v-show="customEditorOption.plusactive">
+            <v-button icon  @click="upload2"><v-icon>mdi-video</v-icon><input ref="videoupload" type="file" style="display:none" accept="video/mp4" @change="onUploadChange('video')"></v-button>
+            </v-row>
           </div>
     </quill-editor>
 </template>
@@ -22,8 +39,12 @@ import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { Quill, quillEditor } from 'vue-quill-editor'
+import { ImageDrop } from 'quill-image-drop-module'
+import ImageResize from 'quill-image-resize-module'
 import katex from 'katex'
 import 'katex/dist/katex.min.css'
+Quill.register('modules/imageDrop', ImageDrop)
+Quill.register('modules/imageResize', ImageResize)
 const win = window
 win.katex = katex // 挂载katex到window，必须
 let Size = Quill.import('attributors/style/size')
@@ -39,44 +60,144 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       content: null,
+      overlay: false,
+      uploading: false,
+      uploadingprogress: 69,
       editorOption: {
         placeholder: '编辑文章内容',
         modules: {
           formula: true,
           toolbar: {
             container: '#toolbar'
+          },
+          imageDrop: true,
+          imageResize: {
+            displayStyles: {
+              backgroundColor: 'black',
+              border: 'none',
+              color: 'white'
+            },
+            handleStyles: {
+              border: '1px solid #06c',
+              width: '16px',
+              height: '16px'
+            },
+            modules: ['Resize', 'DisplaySize', 'Toolbar']
           }
         },
         theme: 'snow'
       },
       customEditorOption: {
+        plusactive: false,
+        pretendactive: false,
         fontactive: 0,
+        pretendtoobar: {
+          activecount: 0,
+          components: [
+            {
+              label: '加粗',
+              icon: 'mdi-format-bold',
+              value: 'bold',
+              active: false,
+              onattr: 'true',
+              offattr: ''
+            },
+            {
+              label: '斜体',
+              icon: 'mdi-format-italic',
+              value: 'italic',
+              active: false,
+              onattr: 'true',
+              offattr: ''
+            },
+            {
+              label: '下划线',
+              icon: 'mdi-format-strikethrough',
+              value: 'strike',
+              active: false,
+              onattr: 'true',
+              offattr: ''
+            },
+            {
+              label: '引用',
+              icon: 'mdi-format-quote-close',
+              value: 'blockquote',
+              active: false,
+              onattr: 'true',
+              offattr: ''
+            }
+          ]
+        },
         fontsizes: [{
           label: '小',
           value: '1rem',
-          icon: 'mdi-alpha-s-box-outline',
+          icon: 'mdi-alpha-s-box-outline'
         },
         {
           label: '中',
           value: '1.5rem',
-          icon: 'mdi-alpha-l-box-outline',
+          icon: 'mdi-alpha-l-box-outline'
         }]
       }
     }
+  },
+  mounted: function () {
+    this.$refs.myTextEditor.quill.on('editor-change', (eventName, ...args) => {
+      if (eventName === 'text-change') {
+        this.customEditorOption.pretendactive = false
+        // args[0] will be delta
+      } else if (eventName === 'selection-change') {
+        // args[0] will be old range
+      }
+    })
   },
   methods: {
     changeattr (attr, value) {
       this.$refs.myTextEditor.quill.format(attr, value)
     },
-    uploadimage () {
+    upload () {
       this.$refs.imageupload.dispatchEvent(new MouseEvent('click'))
     },
-    onImgChange () {
-      let inputfile = this.$refs.imageupload.files[0]
-      let reader = new FileReader()
-      reader.readAsDataURL(inputfile)
-      reader.onload = (e) => {
-        this.$refs.myTextEditor.quill.insertEmbed(this.$refs.myTextEditor.quill.getLength(), 'image', reader.result)
+    upload2 () {
+      this.$refs.videoupload.dispatchEvent(new MouseEvent('click'))
+    },
+    plusextend () {
+      this.customEditorOption.plusactive = !this.customEditorOption.plusactive
+      if (this.customEditorOption.plusactive) {
+        this.$refs.toolbar.style.height = 'auto'
+      } else {
+
+      }
+    },
+    pretendextend () {
+      this.customEditorOption.pretendactive = !this.customEditorOption.pretendactive
+    },
+    pretendclick (index) {
+      this.customEditorOption.pretendtoobar.components[index].active = !this.customEditorOption.pretendtoobar.components[index].active
+      if (this.customEditorOption.pretendtoobar.components[index].active) {
+        this.customEditorOption.pretendtoobar.activecount = this.customEditorOption.pretendtoobar.activecount + 1
+      } else {
+        this.customEditorOption.pretendtoobar.activecount = this.customEditorOption.pretendtoobar.activecount - 1
+      }
+      console.log(this.customEditorOption.pretendtoobar)
+    },
+    onUploadChange (type) {
+      let inputfile
+      if (type === 'image') {
+        inputfile = this.$refs.imageupload.files[0]
+        let reader = new FileReader()
+        reader.readAsDataURL(inputfile)
+        reader.onload = (e) => {
+          let index = 0
+          if (this.$refs.myTextEditor.quill.getSelection() !== null) index = this.$refs.myTextEditor.quill.getSelection().index
+          this.$refs.myTextEditor.quill.insertEmbed(index, type, reader.result)
+        }
+      } else {
+        this.uploading = true
+        inputfile = this.$refs.videoupload.files[0]
+        setTimeout(() => {
+          this.uploading = false
+        }, 1000)
       }
     }
   }

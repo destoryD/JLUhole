@@ -16,6 +16,9 @@
   "dependencies": {
     "axios": "^0.21.1",
     "katex": "^0.12.0",
+    "quill-image-drop-module": "^1.0.3",
+    "quill-image-resize-module": "^3.0.0",
+    "quill-vue-mobile": "^1.1.3",
     "swiper": "^6.4.5",
     "vue": "^2.5.2",
     "vue-awesome-swiper": "^4.1.1",

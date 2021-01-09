@@ -2,17 +2,20 @@
 <v-app>
     <AppBar> </AppBar>
       <IndexContent></IndexContent>
+      <BottomNav></BottomNav>
 </v-app>
 </template>
 
 <script>
 import AppBar from '@/components/AppBar'
 import IndexContent from '@/components/IndexContent'
+import BottomNav from '@/components/BottomNav'
 export default {
   name: 'Index',
   components: {
     AppBar,
-    IndexContent
+    IndexContent,
+    BottomNav
   },
   data () {
     return {

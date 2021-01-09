@@ -2,7 +2,7 @@
 <v-card>
     <v-app-bar app flat hide-on-scroll elevate-on-scroll >
               <v-btn icon>
-        <v-icon large >mdi-home-variant </v-icon>
+        <v-icon large color="rgb(100, 181, 246)" >mdi-tree </v-icon>
       </v-btn>
         <v-row       align="center"
       justify="center" style="padding:1rem">
