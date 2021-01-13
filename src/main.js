@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import vuetify from '@/plugins/vuetify'
+import VueAwesomeSwiper from '@/plugins/VueAwesomeSwiper'
 import vuescroller from 'vue-scroller'
 Vue.config.productionTip = false
 Vue.use(vuescroller)
@@ -12,6 +13,7 @@ new Vue({
   el: '#app',
   router,
   vuetify,
+  VueAwesomeSwiper,
   components: { App },
   template: '<App/>'
 })

@@ -1,7 +1,7 @@
 <template>
 <v-app>
     <AppBar> </AppBar>
-      <IndexContent></IndexContent>
+    <IndexContent></IndexContent>
       <BottomNav></BottomNav>
 </v-app>
 </template>
@@ -24,3 +24,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.swiper-wrapper {
+  height:100%
+}
+</style>

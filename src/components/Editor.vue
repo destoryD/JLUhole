@@ -1,6 +1,6 @@
 <template>
-    <quill-editor v-model="content" ref="myTextEditor" :options="editorOption">
-         <div ref="toolbar" id="toolbar" slot="toolbar" style="width:100%;z-index:999;position:fixed;bottom:0">
+    <quill-editor id="myTextEditor" v-model="content" ref="myTextEditor" :options="editorOption" style="margin-bottom:40px">
+         <div ref="toolbar" id="toolbar" slot="toolbar" style="width:100%;z-index:999;position:fixed;bottom:0;background-color:white">
             <!-- Add a bold button -->
                 <v-overlay :value="overlay">
     <v-progress-circular
@@ -13,10 +13,12 @@
       上传中<br>{{ uploadingprogress }}%
     </v-progress-circular>
     </v-overlay>
+    <v-expand-transition>
             <v-row style="display:flex;justify-content:space-between;margin:6px" v-show="customEditorOption.pretendactive">
             <v-button icon v-for="(item, index) in customEditorOption.pretendtoobar.components" :key="index" @click="()=>{pretendclick(index),changeattr(item.value,item.active?item.onattr:item.offattr)}"><v-icon :style="item.active ? 'color:#06c':''">{{item.icon}}</v-icon></v-button>
             <button class="ql-formula" title="引用"></button>
             </v-row>
+    </v-expand-transition>
             <v-row style="display:flex;justify-content:space-between;margin:6px">
                 <v-button icon  @click="pretendextend"><v-icon :style="this.customEditorOption.pretendtoobar.activecount? 'color:#06c':''">mdi-format-letter-case</v-icon></v-button>
             <v-button icon v-for="(item, index) in customEditorOption.fontsizes" :key="item.label + index" @click="()=>{changeattr('size', item.value),customEditorOption.fontactive=index}" ><v-icon :style="customEditorOption.fontactive===index ? 'color:#06c':''">{{item.icon}}</v-icon></v-button>
@@ -27,9 +29,11 @@
             <v-button icon @click="upload"><v-icon>mdi-image-multiple</v-icon><input ref="imageupload" type="file" style="display:none" accept="image/gif,image/jpeg,image/jpg,image/png" @change="onUploadChange('image')"></v-button>
             <v-button icon @click="plusextend"><v-icon :style="customEditorOption.plusactive?'color:#06c':''">{{customEditorOption.plusactive?'mdi-minus-circle':'mdi-plus-circle'}}</v-icon></v-button>
             </v-row>
+                <v-expand-transition>
             <v-row style="display:flex;justify-content:space-between;margin:6px;float:right" v-show="customEditorOption.plusactive">
-            <v-button icon  @click="upload2"><v-icon>mdi-video</v-icon><input ref="videoupload" type="file" style="display:none" accept="video/mp4" @change="onUploadChange('video')"></v-button>
+            <v-button icon ><v-icon disabled >mdi-video</v-icon><input ref="videoupload" type="file" style="display:none" accept="video/mp4" @change="onUploadChange('video')"></v-button>
             </v-row>
+                </v-expand-transition>
           </div>
     </quill-editor>
 </template>
@@ -175,9 +179,9 @@ export default {
     pretendclick (index) {
       this.customEditorOption.pretendtoobar.components[index].active = !this.customEditorOption.pretendtoobar.components[index].active
       if (this.customEditorOption.pretendtoobar.components[index].active) {
-        this.customEditorOption.pretendtoobar.activecount = this.customEditorOption.pretendtoobar.activecount + 1
+        this.customEditorOption.pretendtoobar.activecount += 1
       } else {
-        this.customEditorOption.pretendtoobar.activecount = this.customEditorOption.pretendtoobar.activecount - 1
+        this.customEditorOption.pretendtoobar.activecount -= 1
       }
       console.log(this.customEditorOption.pretendtoobar)
     },
@@ -185,12 +189,18 @@ export default {
       let inputfile
       if (type === 'image') {
         inputfile = this.$refs.imageupload.files[0]
+        if (inputfile === null) return
         let reader = new FileReader()
         reader.readAsDataURL(inputfile)
         reader.onload = (e) => {
           let index = 0
           if (this.$refs.myTextEditor.quill.getSelection() !== null) index = this.$refs.myTextEditor.quill.getSelection().index
-          this.$refs.myTextEditor.quill.insertEmbed(index, type, reader.result)
+          this.$refs.myTextEditor.quill.insertText(index, '\n')
+          this.$refs.myTextEditor.quill.insertEmbed(index + 1, type, reader.result)
+          this.$refs.myTextEditor.quill.insertText(index + 2, '\n')
+          this.$refs.myTextEditor.quill.setSelection(index + 3)
+          let element = document.querySelector('#myTextEditor')
+          element.scrollIntoView(false)
         }
       } else {
         this.uploading = true
@@ -209,5 +219,6 @@ export default {
 }
 .ql-container {
     font-size:1rem;
+    letter-spacing: 0.1rem
 }
 </style>

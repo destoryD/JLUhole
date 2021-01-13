@@ -1,6 +1,6 @@
 <template>
 <div id="content">
-    <scroller :on-refresh="onRefresh" :on-infinite="OnInfinite" ref="content_scroller">
+    <scroller :on-refresh="onRefresh" :on-infinite="OnInfinite" ref="content_scroller" >
   <v-card outlined v-for="(card,index) in carddata" :key="card.Title + index">
     <v-container fluid>
     <v-card-title class="font-weight-bold text-subtitle-1 text-left" style="padding-left:0;padding-top:0;">{{card.Title}}</v-card-title>
