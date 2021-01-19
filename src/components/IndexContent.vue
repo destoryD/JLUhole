@@ -5,7 +5,10 @@
     <v-container fluid>
     <v-card-title class="font-weight-bold text-subtitle-1 text-left" style="padding-left:0;padding-top:0;">{{card.Title}}</v-card-title>
     <v-card-text>
-        <v-row class="text-left " style="display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;text-overflow:ellipsis;overflow:hidden">{{card.Content}}</v-row>
+        <v-row class="text-left ">
+          <span style="display: -webkit-box;-webkit-line-clamp: 3;-webkit-box-orient: vertical;text-overflow:ellipsis;overflow:hidden">{{card.Content}}</span>
+            <v-img class="rounded" :aspect-ratio="16/9" v-if="card.mixpic" width="100%" :src="card.picurl"></v-img>
+        </v-row>
     </v-card-text>
     <v-card-text style="padding-bottom:0.5rem">
         <v-row class="text-left" style="color:rgba(0,0,0,.6)">{{card.hot}}热度 · {{card.posts}}评论<v-spacer></v-spacer>{{card.LastUpdateTimestamp}}</v-row>
@@ -52,7 +55,9 @@ export default {
           PostTimestamp: 1610026871,
           LastUpdateTimestamp: new Date(1610026871000).toLocaleDateString() + ' ' + new Date(1600026871000).toLocaleTimeString(),
           hot: 2000,
-          posts: 100
+          posts: 100,
+          mixpic: false,
+          picurl: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1620705785,656770412&fm=26&gp=0.jpg'
         },
         {
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
@@ -60,7 +65,8 @@ export default {
           PostTimestamp: 1610026871,
           LastUpdateTimestamp: new Date(1610026871000).toLocaleDateString() + ' ' + new Date(1600026871000).toLocaleTimeString(),
           hot: 2000,
-          posts: 100
+          posts: 100,
+          mixpic: false
         },
         {
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
@@ -68,7 +74,8 @@ export default {
           PostTimestamp: 1610026871,
           LastUpdateTimestamp: new Date(1611026871000).toLocaleDateString() + ' ' + new Date(1601026871000).toLocaleTimeString(),
           hot: 0,
-          posts: 1
+          posts: 1,
+          mixpic: false
         },
         {
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
@@ -76,7 +83,8 @@ export default {
           PostTimestamp: 1610026871,
           LastUpdateTimestamp: new Date(1610026871000).toLocaleDateString() + ' ' + new Date(1600026871000).toLocaleTimeString(),
           hot: 2000,
-          posts: 100
+          posts: 100,
+          mixpic: false
         },
         {
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
@@ -84,7 +92,8 @@ export default {
           PostTimestamp: 1610026871,
           LastUpdateTimestamp: new Date(1611026871000).toLocaleDateString() + ' ' + new Date(1601026871000).toLocaleTimeString(),
           hot: 0,
-          posts: 1
+          posts: 1,
+          mixpic: false
         }
       ]
     }

@@ -1,6 +1,6 @@
 <template>
 <v-card>
-    <v-app-bar app flat hide-on-scroll elevate-on-scroll >
+    <v-app-bar app flat hide-on-scroll elevate-on-scroll id="appbar">
               <v-btn icon>
         <v-icon large color="rgb(100, 181, 246)" >mdi-tree </v-icon>
       </v-btn>
@@ -29,7 +29,7 @@
           <v-tabs-slider color="transparent"></v-tabs-slider>
           <v-tab v-for="tabitem in tabitems" :key="tabitem.label" v-show="tabitem.active" @click="tabselect">{{tabitem.label}}</v-tab>
         </v-tabs>
-                          <v-btn icon>
+                          <v-btn icon @click="showbar">
         <v-icon color="black" >mdi-magnify </v-icon>
       </v-btn>
       </template>
@@ -63,6 +63,9 @@ export default {
   methods: {
     tabselect () {
       // console.log(this.tabselected)
+    },
+    showbar () {
+      console.log(this.$refs.appbar)
     }
   }
 }
