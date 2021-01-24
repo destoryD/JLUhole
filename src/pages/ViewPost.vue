@@ -1,16 +1,17 @@
 <template>
-<v-app-bar app>
+<div>
   <TopBar></TopBar>
-</v-app-bar>
+    <ViewContent></ViewContent>
+</div>
 </template>
 
 <script>
-import PostContent from '@/components/PostContent'
+import ViewContent from '@/components/ViewContent'
 import TopBar from '@/components/TopBar'
 export default {
   name: 'ViewPost',
   components: {
-    PostContent,
+    ViewContent,
     TopBar
   },
   data () {

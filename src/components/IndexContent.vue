@@ -1,7 +1,7 @@
 <template>
 <div id="content">
     <scroller :on-refresh="onRefresh" :on-infinite="OnInfinite" ref="content_scroller" >
-  <v-card outlined v-for="(card,index) in carddata" :key="card.Title + index">
+  <v-card outlined v-for="(card,index) in carddata" :key="card.Title + index" tile>
     <v-container fluid>
     <v-card-title class="font-weight-bold text-subtitle-1 text-left" style="padding-left:0;padding-top:0;">{{card.Title}}</v-card-title>
     <v-card-text>
@@ -54,7 +54,7 @@ export default {
           Content: '我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛',
           PostTimestamp: 1610026871,
           LastUpdateTimestamp: new Date(1610026871000).toLocaleDateString() + ' ' + new Date(1600026871000).toLocaleTimeString(),
-          hot: 2000,
+          hot: 1854,
           posts: 100,
           mixpic: false,
           picurl: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1620705785,656770412&fm=26&gp=0.jpg'
@@ -64,7 +64,7 @@ export default {
           Content: '我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛',
           PostTimestamp: 1610026871,
           LastUpdateTimestamp: new Date(1610026871000).toLocaleDateString() + ' ' + new Date(1600026871000).toLocaleTimeString(),
-          hot: 2000,
+          hot: 1599,
           posts: 100,
           mixpic: false
         },

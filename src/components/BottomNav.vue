@@ -49,7 +49,7 @@ export default {
           activeicon: 'mdi-account',
           active: false,
           onstyle: 'color:black',
-          msgcount: 1
+          msgcount: 9
         }
       ]
     }
