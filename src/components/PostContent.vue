@@ -1,12 +1,10 @@
 <template>
   <v-card flat>
-      <v-container fluid>
-          <v-toolbar>
+    <v-app-bar app flat dense>
               <v-btn icon>
                   <v-icon>mdi-arrow-left</v-icon>
               </v-btn>
-          </v-toolbar>
-      </v-container>
+    </v-app-bar>
   </v-card>
 </template>
 

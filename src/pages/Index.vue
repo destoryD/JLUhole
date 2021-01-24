@@ -1,6 +1,7 @@
 <template>
 <v-app>
     <AppBar> </AppBar>
+    <div id="alert"></div>
     <IndexContent></IndexContent>
       <BottomNav></BottomNav>
 </v-app>

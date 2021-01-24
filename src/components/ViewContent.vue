@@ -6,9 +6,7 @@
         <v-card flat>
             <v-card-title>测试一下标题显示测试一下标题显示测试一下标题显示</v-card-title>
             <v-divider></v-divider>
-            <v-container>
-                <h1>12345678910111213141516
-                </h1>
+            <v-container v-html="html">
             </v-container>
         </v-card>
         </v-skeleton-loader>
@@ -21,7 +19,8 @@ export default {
   data () {
     return ({
       msg: '',
-      loading: true
+      loading: true,
+      html: ''
     })
   }
 }

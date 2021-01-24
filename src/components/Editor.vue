@@ -1,18 +1,7 @@
 <template>
-    <quill-editor id="myTextEditor" v-model="content" ref="myTextEditor" :options="editorOption" style="margin-bottom:40px">
+    <quill-editor id="myTextEditor" v-model="content" ref="myTextEditor" :options="editorOption" class="my-3">
          <div ref="toolbar" id="toolbar" slot="toolbar" style="width:100%;z-index:999;position:fixed;bottom:0;background-color:white">
             <!-- Add a bold button -->
-                <v-overlay :value="overlay">
-    <v-progress-circular
-      :size="100"
-      :value="uploadingprogress"
-      :width="10"
-      color="red"
-      indeterminate
-    >
-      上传中<br>{{ uploadingprogress }}%
-    </v-progress-circular>
-    </v-overlay>
     <v-expand-transition>
             <v-row style="display:flex;justify-content:space-between;margin:6px" v-show="customEditorOption.pretendactive">
             <v-button icon v-for="(item, index) in customEditorOption.pretendtoobar.components" :key="index" @click="()=>{pretendclick(index),changeattr(item.value,item.active?item.onattr:item.offattr)}"><v-icon :style="item.active ? 'color:#06c':''">{{item.icon}}</v-icon></v-button>
@@ -199,8 +188,11 @@ export default {
           this.$refs.myTextEditor.quill.insertEmbed(index + 1, type, reader.result)
           this.$refs.myTextEditor.quill.insertText(index + 2, '\n')
           this.$refs.myTextEditor.quill.setSelection(index + 3)
-          let element = document.querySelector('#myTextEditor')
-          element.scrollIntoView(false)
+          this.$vuetify.goTo('.ql-editor', {offset: -this.$refs.myTextEditor.$refs.editor.scrollHeight})
+          console.log(this.$refs.myTextEditor.$refs.editor.scrollHeight)
+          console.log(this.$refs.toolbar)
+          // let element = document.querySelector('#myTextEditor')
+          // element.scrollIntoView(false)
         }
       } else {
         this.uploading = true
@@ -220,5 +212,8 @@ export default {
 .ql-container {
     font-size:1rem;
     letter-spacing: 0.1rem
+}
+.ql-editor {
+  padding-bottom: 44px;
 }
 </style>
