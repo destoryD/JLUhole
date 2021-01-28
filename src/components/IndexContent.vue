@@ -20,6 +20,7 @@
 </div>
 </template>
 <script>
+import {fetchGetIndex} from '../api/index'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import 'swiper/swiper-bundle.css'
 export default {
@@ -34,9 +35,10 @@ export default {
   methods: {
     onRefresh (done) {
       console.log('refresh')
-      setTimeout(() => {
+      fetchGetIndex().then(response => {
+        console.log(response)
         done(true)
-      }, 1000)
+      })
     },
     OnInfinite (done) {
       console.log('infinite')

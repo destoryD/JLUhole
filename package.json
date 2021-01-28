@@ -26,7 +26,8 @@
     "vue-router": "^3.0.1",
     "vue-scroller": "^2.2.4",
     "vue-tabs-swiper": "^1.1.6",
-    "vuetify": "^2.4.0"
+    "vuetify": "^2.4.0",
+    "vuetify-extension": "^0.2.2"
   },
   "devDependencies": {
     "@mdi/js": "^5.8.55",

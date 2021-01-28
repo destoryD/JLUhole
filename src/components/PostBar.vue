@@ -8,7 +8,7 @@
               <span>{{this.title}}</span>
               <v-spacer></v-spacer>
               <v-btn icon @click="showDetails">
-                  <v-icon color="#06c">mdi-alert-circle-outline</v-icon>
+                  <v-icon>mdi-send</v-icon>
               </v-btn>
     </v-app-bar>
   </v-card>
