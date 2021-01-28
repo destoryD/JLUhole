@@ -34,19 +34,16 @@ export default {
         {
           id: 1,
           label: '#情感',
-          color: '#06c',
           choose: false
         },
         {
           id: 2,
           label: '#吐槽',
-          color: '#06c',
           choose: false
         },
         {
           id: 3,
           label: '#求助',
-          color: '#06c',
           choose: false
         }
       ]

@@ -7,6 +7,7 @@ import vuetify from '@/plugins/vuetify'
 import vuescroller from 'vue-scroller'
 Vue.config.productionTip = false
 Vue.use(vuescroller)
+Vue.use(router)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

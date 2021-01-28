@@ -20,7 +20,7 @@
         placeholder="吉林大学树洞正式开通了"
       ></v-text-field>
         </v-row>
-              <v-btn icon>
+              <v-btn icon to="/post">
         <v-icon large color="#64B5F6">mdi-plus-circle</v-icon>
       </v-btn>
       <template v-slot:extension>

@@ -1,5 +1,3 @@
 export default{
-  globaldata: {
-    login: false
-  }
+  login: false
 }

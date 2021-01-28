@@ -1,7 +1,7 @@
 <template>
   <v-card flat>
           <v-app-bar  app flat dense>
-              <v-btn icon>
+              <v-btn icon @click="back">
                   <v-icon>mdi-arrow-left</v-icon>
               </v-btn>
               <v-spacer></v-spacer>
@@ -41,6 +41,11 @@
 export default {
   mounted () {
     // console.log(this.title)
+  },
+  methods: {
+    back () {
+      this.$router.go(-1)
+    }
   },
   data () {
     return {

@@ -1,7 +1,7 @@
 <template>
 <div id="content">
     <scroller :on-refresh="onRefresh" :on-infinite="OnInfinite" ref="content_scroller" >
-  <v-card outlined v-for="(card,index) in carddata" :key="card.Title + index" tile>
+  <v-card outlined v-for="(card,index) in carddata" :key="card.Title + index" tile :to="'/view/'+card.uid">
     <v-container fluid>
     <v-card-title class="font-weight-bold text-subtitle-1 text-left" style="padding-left:0;padding-top:0;">{{card.Title}}</v-card-title>
     <v-card-text>
@@ -52,6 +52,7 @@ export default {
       loading: true,
       carddata: [
         {
+          uid: 1,
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
           Content: '我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛',
           PostTimestamp: 1610026871,
@@ -62,6 +63,7 @@ export default {
           picurl: 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1620705785,656770412&fm=26&gp=0.jpg'
         },
         {
+          uid: 2,
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
           Content: '我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛',
           PostTimestamp: 1610026871,
@@ -71,6 +73,7 @@ export default {
           mixpic: false
         },
         {
+          uid: 3,
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
           Content: '我这是测试一下内容，小新测试赛我这是测试一下一下内容，小新测试赛我这是测试一',
           PostTimestamp: 1610026871,
@@ -80,6 +83,7 @@ export default {
           mixpic: false
         },
         {
+          uid: 4,
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
           Content: '我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛我这是测试一下内容，小新测试赛',
           PostTimestamp: 1610026871,
@@ -89,6 +93,7 @@ export default {
           mixpic: false
         },
         {
+          uid: 5,
           Title: '如果用AMD的CPU配上N卡会有什么效果？',
           Content: '我这是测试一下内容，小新测试赛我这是测试一下一下内容，小新测试赛我这是测试一',
           PostTimestamp: 1610026871,

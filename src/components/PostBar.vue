@@ -1,7 +1,7 @@
 <template>
   <v-card flat>
     <v-app-bar app flat dense>
-              <v-btn icon>
+              <v-btn icon @click="back">
                   <v-icon>mdi-arrow-left</v-icon>
               </v-btn>
               <v-spacer></v-spacer>
@@ -25,6 +25,9 @@ export default {
   methods: {
     showDetails () {
       console.log('123')
+    },
+    back () {
+      this.$router.go(-1)
     }
   }
 }
