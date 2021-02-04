@@ -14,6 +14,7 @@
         dense
         append-icon="mdi-magnify"
         single-line
+        clearable
         class="rounded-pill"
         justify="center"
         style="text-indext:1rem"

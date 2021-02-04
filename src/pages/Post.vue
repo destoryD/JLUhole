@@ -2,7 +2,15 @@
     <div>
         <post-bar></post-bar>
         <v-skeleton-loader type="article">
-          <div id="alert"></div>
+          <div id="alert">
+                <v-alert
+      dense
+      outlined
+      type="info"
+    >
+      发布树洞前请先阅读 <strong><router-link to='/' style="text-decoration:none">树洞守则</router-link></strong>
+    </v-alert>
+          </div>
         <v-text-field  solo placeholder="请输入标题" hide-details></v-text-field>
         <editor></editor>
         <v-divider></v-divider>

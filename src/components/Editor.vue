@@ -1,6 +1,7 @@
 <template>
-    <quill-editor id="myTextEditor" v-model="content" ref="myTextEditor" :options="editorOption" class="my-3">
-         <div ref="toolbar" id="toolbar" slot="toolbar" style="width:100%;z-index:999;position:fixed;bottom:0;background-color:white">
+    <div id="quill-wrap">
+    <quill-editor id="myTextEditor" v-model="content" ref="myTextEditor" :options="editorOption" class="my-3" >
+         <div ref="toolbar" id="toolbar" slot="toolbar" style="width:100%;z-index:999;position:fixed;bottom:0;background-color:white" v-show="!dialog">
             <!-- Add a bold button -->
     <v-expand-transition>
             <v-row style="display:flex;justify-content:space-between;margin:6px" v-show="customEditorOption.pretendactive">
@@ -15,7 +16,7 @@
             <!-- Add font size dropdown -->
             <!-- Add subscript and superscript buttons -->
             <!-- <v-button icon title="照片"><v-icon>mdi-image-multiple</v-icon></v-button> -->
-            <v-button icon @click="upload"><v-icon>mdi-image-multiple</v-icon><input ref="imageupload" type="file" style="display:none" accept="image/gif,image/jpeg,image/jpg,image/png" @change="onUploadChange('image')"></v-button>
+            <v-button icon @click="upload" class="ql-image"><v-icon>mdi-image-multiple</v-icon><input id="imageupload" ref="imageupload" type="file" style="display:none" accept="image/gif,image/jpeg,image/jpg,image/png" @change="onUploadChange('image')"></v-button>
             <v-button icon @click="plusextend"><v-icon :style="customEditorOption.plusactive?'color:#06c':''">{{customEditorOption.plusactive?'mdi-minus-circle':'mdi-plus-circle'}}</v-icon></v-button>
             </v-row>
                 <v-expand-transition>
@@ -25,6 +26,26 @@
                 </v-expand-transition>
           </div>
     </quill-editor>
+        <v-dialog
+      v-model="dialog"
+      persistent
+      width="300"
+    >
+      <v-card
+        color="primary"
+        dark
+      >
+        <v-card-text>
+          图片上传中
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    </div>
 </template>
 
 <script>
@@ -52,6 +73,7 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      dialog: false,
       content: null,
       overlay: false,
       uploading: false,
@@ -135,6 +157,9 @@ export default {
     }
   },
   mounted: function () {
+    setInterval(() => {
+      console.log(this.content)
+    }, 1000)
     this.$refs.myTextEditor.quill.on('editor-change', (eventName, ...args) => {
       if (eventName === 'text-change') {
         this.customEditorOption.pretendactive = false
@@ -172,13 +197,14 @@ export default {
       } else {
         this.customEditorOption.pretendtoobar.activecount -= 1
       }
-      console.log(this.customEditorOption.pretendtoobar)
+      // console.log(this.customEditorOption.pretendtoobar)
     },
     onUploadChange (type) {
       let inputfile
       if (type === 'image') {
         inputfile = this.$refs.imageupload.files[0]
         if (inputfile === null) return
+        this.dialog = true
         let reader = new FileReader()
         reader.readAsDataURL(inputfile)
         reader.onload = (e) => {
@@ -189,8 +215,9 @@ export default {
           this.$refs.myTextEditor.quill.insertText(index + 2, '\n')
           this.$refs.myTextEditor.quill.setSelection(index + 3)
           this.$vuetify.goTo('.ql-editor', {offset: -this.$refs.myTextEditor.$refs.editor.scrollHeight})
-          console.log(this.$refs.myTextEditor.$refs.editor.scrollHeight)
-          console.log(this.$refs.toolbar)
+          this.dialog = false
+          // console.log(this.$refs.myTextEditor.$refs.editor.scrollHeight)
+          // console.log(this.$refs.toolbar)
           // let element = document.querySelector('#myTextEditor')
           // element.scrollIntoView(false)
         }
