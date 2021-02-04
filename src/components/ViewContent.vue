@@ -5,6 +5,7 @@
         type="card-heading,divider,list-item-three-line">
         <v-card flat style="text-align:left">
             <v-card-title style="font-weight:bold">{{title}}</v-card-title>
+            <v-card-text>#1<span style="float:right">发布于 2020.12.21 10:30</span></v-card-text>
             <v-divider></v-divider>
             <v-container v-html="html">
             </v-container>
@@ -14,8 +15,15 @@
         <v-container fluid>
         <v-card flat style="text-align:left" elevation="2" >
             <v-card-subtitle class="text-subtitle-2">#50641
+                <v-btn icon small style="float:right" class="ml-2">
+                <v-icon small>mdi-thumb-down-outline</v-icon>
+                                <v-spacer></v-spacer>
+                1
+              </v-btn>
               <v-btn icon small style="float:right">
-                <v-icon>mdi-dots-horizontal</v-icon>
+                <v-icon small>mdi-thumb-up-outline</v-icon>
+                                <v-spacer></v-spacer>
+                1
               </v-btn>
             </v-card-subtitle>
             <v-card-text class="text-body-2 ma-0">通过分组来删除呢 效果会不会好点
@@ -28,12 +36,7 @@
                 <v-spacer></v-spacer>2
               </v-btn>
               <v-btn small plain class="ma-0">
-                <v-icon small>mdi-arrow-up-bold-outline</v-icon>
-                <v-spacer></v-spacer>
-                1
-              </v-btn>
-                            <v-btn small plain class="ma-0">
-                <v-icon small>mdi-arrow-down-bold-outline</v-icon>
+                <v-icon small>mdi-dots-horizontal</v-icon>
               </v-btn>
             </v-card-actions>
         </v-card>

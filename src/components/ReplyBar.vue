@@ -19,10 +19,10 @@
                       </v-badge>
                   </v-btn>
                   <v-btn icon>
-                      <v-icon>mdi-share</v-icon>
+                      <v-icon>mdi-star-outline</v-icon>
                   </v-btn>
                                     <v-btn icon>
-                      <v-icon>mdi-share</v-icon>
+                      <v-icon >mdi-export-variant</v-icon>
                   </v-btn>
     </v-toolbar>
   </v-card>
