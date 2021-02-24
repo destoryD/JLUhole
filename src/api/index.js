@@ -1,8 +1,9 @@
 import request from '@/utils/request'
 
-export function fetchGetIndex () {
+export function fetchGetIndex (data) {
   return request({
     url: '/index',
-    method: 'get'
+    method: 'post',
+    data
   })
 }

@@ -5,7 +5,7 @@
         type="card-heading,divider,list-item-three-line">
         <v-card flat style="text-align:left">
             <v-card-title style="font-weight:bold">{{title}}</v-card-title>
-            <v-card-text>#1<span style="float:right">发布于 2020.12.21 10:30</span></v-card-text>
+            <v-card-text>#a8098c1a<span style="float:right">发布于 2020.12.21 10:30</span></v-card-text>
             <v-divider></v-divider>
             <v-container v-html="html">
             </v-container>
@@ -54,7 +54,13 @@ export default {
       msg: '',
       loading: true,
       title: '作为一个白帽子，你是如何挖到第一个洞的呢？',
-      html: '<p></p><p>123</p><p>测试一下</p><p>TPO123</p><p>xxx</p>'
+      html: '<p></p><p>123</p><p>测试一下</p><p>TPO123</p><p>xxx</p>',
+      replys: [
+        {
+          id: 1,
+          text: ''
+        }
+      ]
     })
   }
 }

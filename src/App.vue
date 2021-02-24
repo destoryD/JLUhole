@@ -1,14 +1,21 @@
 <template>
 <div id ="app">
   <v-app>
+    <keep-alive>
     <router-view/>
+    </keep-alive>
   </v-app>
 </div>
 </template>
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      dialog: false
+    }
+  }
 }
 </script>
 

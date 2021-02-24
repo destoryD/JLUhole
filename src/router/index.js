@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/pages/Index'
 import ViewPost from '@/pages/ViewPost'
 import Post from '@/pages/Post'
+import Login from '@/pages/Login'
 Vue.use(Router)
 export default new Router({
   routes: [
@@ -25,6 +26,11 @@ export default new Router({
       path: '/post',
       name: 'Post',
       component: Post
+    },
+    {
+      path: '/login',
+      name: 'Login',
+      component: Login
     }
   ]
 })
